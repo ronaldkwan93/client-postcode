@@ -8,4 +8,4 @@
 
 ➕ Add new suburbs to the database via the interface
 
-![PostcodeAPI](<img width="807" height="585" alt="Image" src="https://github.com/user-attachments/assets/fb9d6d8d-6d6a-452e-a5f1-14bbc299f944" />)
+![PostcodeAPI](https://github.com/user-attachments/assets/fb9d6d8d-6d6a-452e-a5f1-14bbc299f944)

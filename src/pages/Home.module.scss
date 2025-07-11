@@ -8,6 +8,8 @@
     justify-content: center;
     align-items: center;
 
+
+
     &__heading {
         h1 {
             color: #2d3748;
@@ -15,6 +17,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin: 0;
         }
         p {
             color: #718096;
@@ -71,5 +74,10 @@
                 font-size: 1.5em;
             }
         }
+    }
+
+    &__dropdown {
+        position: absolute;
+        z-index: 10;
     }
 }

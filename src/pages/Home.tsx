@@ -1,6 +1,10 @@
+import { useState } from "react";
+import Dropdown from "../components/Dropdown/Dropdown";
 import styles from "./Home.module.scss";
 
 const Home = () => {
+  const [dropDown, setDropDown] = useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.container__heading}>
@@ -9,11 +13,19 @@ const Home = () => {
       </div>
       <div>
         <h2>I want to...</h2>
-        <div>
-          <div className={styles.container__action}>
+        <div className={styles.container__actionBox}>
+          <div
+            className={styles.container__action}
+            onClick={() => setDropDown((prev) => !prev)}
+          >
             <h3>Choose an action</h3>
             <p>▼</p>
           </div>
+          {dropDown && (
+            <div className={styles.container__dropdown}>
+              <Dropdown />
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.container__info}>

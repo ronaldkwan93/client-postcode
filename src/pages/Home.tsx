@@ -19,7 +19,13 @@ const Home = () => {
             onClick={() => setDropDown((prev) => !prev)}
           >
             <h3>Choose an action</h3>
-            <p>▼</p>
+            <p
+              className={`${styles["container__arrow"]} ${
+                dropDown ? styles["container__arrow--flipped"] : ""
+              }`}
+            >
+              ▼
+            </p>
           </div>
           {dropDown && (
             <div className={styles.container__dropdown}>

@@ -1,16 +1,20 @@
 import { useState } from "react";
 import Dropdown from "../components/Dropdown/Dropdown";
 import styles from "./Home.module.scss";
+import MotionWrapper from "../utilities/MotionWrapper";
 
 const Home = () => {
   const [dropDown, setDropDown] = useState(false);
 
   return (
     <div className={styles.container}>
-      <div className={styles.container__heading}>
-        <h1>Postcode API</h1>
-        <p>Your comprehensive postcode and suburb lookup service</p>
-      </div>
+      <MotionWrapper>
+        <div className={styles.container__heading}>
+          <h1>Postcode API</h1>
+          <p>Your comprehensive postcode and suburb lookup service</p>
+        </div>
+      </MotionWrapper>
+
       <div>
         <h2>I want to...</h2>
         <div className={styles.container__actionBox}>

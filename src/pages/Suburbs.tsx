@@ -10,6 +10,7 @@ type Postcode = {
   id: number;
   code: string;
   assignedSuburbs: Suburb[];
+  state: string;
 };
 
 const Suburbs = () => {
@@ -17,6 +18,19 @@ const Suburbs = () => {
   const [postcode, setPostcode] = useState<string>("");
 
   console.log("assignedSuburbs:", subs?.assignedSuburbs);
+
+  const handleRefresh = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setPostcode("");
+    setsubs(null);
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPostcode(e.target.value);
+    if (e.target.value == "") {
+      setsubs(null);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,13 +65,15 @@ const Suburbs = () => {
             pattern="\d{4}"
             maxLength={4}
             value={postcode ?? ""}
-            onChange={(e) => setPostcode(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Enter postcode"
-          />{" "}
+          />
+        <button onClick={handleRefresh}>🔄</button>
         </div>
         <div>
           <button>Find me suburbs!</button>
         </div>
+        <div>{postcode && subs && <p>State: {subs?.state}</p>}</div>
         <div>
           {postcode &&
             subs?.assignedSuburbs?.map((suburb, idx) => (

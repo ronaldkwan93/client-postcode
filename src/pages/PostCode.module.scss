@@ -2,18 +2,27 @@
   height: 70vh;
   width: 40vw;
   border-radius: 24px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.23);
+  -webkit-box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.23);
 
   h2 {
     font-size: 2em;
     margin-bottom: 0.5em;
   }
 
+  &__buttons {
+    display: flex;
+    margin-bottom: 1em;
+  }
+
   &__refresh {
-    padding: 1.2em;
+    padding: 1em;
+    margin: 0;
     &:hover {
       box-shadow: none;
       outline: none;

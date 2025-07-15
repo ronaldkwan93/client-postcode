@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import styles from "./Suburbs.module.scss";
 import { getSuburbs } from "../services/dataServices";
+import { AlertCircle, Home, RotateCcw, Search } from "lucide-react";
+import ShakeWrapper from "../utilities/ShakeWrapper";
 
 type Suburb = {
   suburb: string;
@@ -19,17 +21,17 @@ const Suburbs = () => {
   const [postcode, setPostcode] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<Boolean>(false);
   const [valError, setValError] = useState<string>("");
-
+  const [shake, setShake] = useState(false);
 
   console.log("assignedSuburbs:", subs?.assignedSuburbs);
 
   const validateField = (postcode: string) => {
-    if(postcode == "") {
+    if (postcode == "") {
       setValError("Postcode can't be empty!");
       return false;
-    } 
+    }
     return true;
-  }
+  };
 
   const handleRefresh = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -38,7 +40,6 @@ const Suburbs = () => {
     setErrorMessage(false);
     setValError("");
     inputRef.current?.focus();
-    
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,9 +56,12 @@ const Suburbs = () => {
     setValError("");
     inputRef.current?.focus();
     const fieldValid = validateField(postcode);
-    if(!fieldValid) {
+    if (!fieldValid) {
+      setShake(true);
+      setTimeout(() => setShake(false), 400);
+
       return;
-    } 
+    }
 
     if (postcode.trim() !== "") {
       try {
@@ -69,6 +73,7 @@ const Suburbs = () => {
         }
         console.log(data, "null here?");
         if (data === null) {
+          setShake(true);
           setErrorMessage(true);
         }
       } catch (error) {
@@ -83,9 +88,14 @@ const Suburbs = () => {
   return (
     <div className={styles.container}>
       <div>
-        <h1>Suburb finder </h1>
+        <Home className={styles.container__home} />
+        <h2>Suburb finder </h2>
       </div>
-      <form action="" onSubmit={handleSubmit}>
+      <form
+        action=""
+        onSubmit={handleSubmit}
+        className={styles.container__form__input}
+      >
         <div>
           <input
             ref={inputRef}
@@ -95,26 +105,54 @@ const Suburbs = () => {
             maxLength={4}
             value={postcode ?? ""}
             onChange={handleInputChange}
-            placeholder="Enter postcode"
+            placeholder="Enter 4-digit postcode"
           />
-          <button type="button" onClick={handleRefresh}>
-            🔄
+        </div>
+
+        <div className={styles.container__buttons}>
+          <button
+            type="button"
+            onClick={handleRefresh}
+            className={styles.container__refresh}
+          >
+            <RotateCcw size={20} />
+          </button>
+          <button type="submit" className={styles.container__findButton}>
+            <div className={styles.container__findButton__section}>
+              <Search />
+              Find Postcode
+            </div>
           </button>
         </div>
-        <div>{valError && valError}</div>
-        <div>
-          <button>Find me suburbs!</button>
-        </div>
-        <div>{postcode && subs && <p>State: {subs?.state}</p>}</div>
-        <div className={styles.container__results}>
-          {postcode &&
-            subs?.assignedSuburbs?.map((suburb, idx) => (
-              <div key={idx}>{suburb.suburb}</div>
-            ))}
-        </div>
-        <div>
-          {errorMessage && <div>Sorry this Postcode has no suburbs yet!</div>}
-        </div>
+        {postcode && subs && (
+          <div className={styles.container__results}>
+            <h3>{subs.state}</h3>
+            <div className={styles.container__results__list}>
+              {subs.assignedSuburbs.map((suburb, idx) => (
+                <div className={styles.container__results__subs} key={idx}>
+                  {suburb.suburb}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {valError && (
+          <div className={styles.container__suburbsNotFound}>
+            <ShakeWrapper shake={shake}>
+              <AlertCircle />
+              <div>{valError}</div>
+            </ShakeWrapper>
+          </div>
+        )}
+        {errorMessage && (
+          <div className={styles.container__suburbsNotFound}>
+            <ShakeWrapper shake={shake}>
+              <AlertCircle />
+              <div>Sorry this Postcode has no suburbs yet!</div>
+            </ShakeWrapper>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -112,7 +112,7 @@ const PostCode = () => {
         </div>
       </form>
 
-      <div>
+      <div className={styles.container__buttons}>
         <button
           type="button"
           onClick={handleRefresh}
@@ -148,6 +148,7 @@ const PostCode = () => {
       {errorMessage && (
         <div className={styles.container__postcodeNotFound}>
           <ShakeWrapper shake={shake}>
+            <AlertCircle />
             <div>No Postcode found! Try again!</div>
           </ShakeWrapper>
         </div>

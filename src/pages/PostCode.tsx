@@ -62,16 +62,12 @@ const PostCode = () => {
       setErrorMessage(true);
       setShake(true);
       setTimeout(() => setShake(false), 400);
-    }
+    } 
     setValidationErrors({ subInput: "", stateInput: "" });
     setPostCode(result);
     setConfirmedState(stateInput);
     setConfirmedSuburb(subInput);
   };
-
-  console.log(subInput);
-  console.log(stateInput);
-  console.log(postCode);
 
   return (
     <div className={styles.container}>

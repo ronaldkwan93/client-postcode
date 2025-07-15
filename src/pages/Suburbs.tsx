@@ -29,6 +29,9 @@ const Suburbs = () => {
     if (postcode == "") {
       setValError("Postcode can't be empty!");
       return false;
+    } else if (/[A-Za-z]/.test(postcode)) {
+      setValError("Please provide a valid postcode");
+      return false;
     }
     return true;
   };
@@ -59,7 +62,6 @@ const Suburbs = () => {
     if (!fieldValid) {
       setShake(true);
       setTimeout(() => setShake(false), 400);
-
       return;
     }
 
@@ -67,8 +69,6 @@ const Suburbs = () => {
       try {
         const data = await getSuburbs(postcode);
         if (data) {
-          console.log("Received suburb data:", data);
-
           setsubs(data);
         }
         console.log(data, "null here?");
@@ -82,8 +82,6 @@ const Suburbs = () => {
     }
   };
 
-  console.log(subs);
-  console.log(postcode);
 
   return (
     <div className={styles.container}>
@@ -100,8 +98,6 @@ const Suburbs = () => {
           <input
             ref={inputRef}
             type="text"
-            inputMode="numeric"
-            pattern="\d{4}"
             maxLength={4}
             value={postcode ?? ""}
             onChange={handleInputChange}

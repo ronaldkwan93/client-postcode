@@ -8,7 +8,7 @@ import Header from "./components/Header/Header";
 import AddSuburb from "./pages/AddSuburb";
 
 function App() {
- 
+
   return (
     <>
       <div className={styles.container}>

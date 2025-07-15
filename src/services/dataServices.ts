@@ -6,6 +6,10 @@ export const getSuburbs = async (postcode: String) => {
       `${API_BASE_URL}/postcode?postcode=${postcode}`
     );
 
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
     const result = await response.json();
     return result;
   } catch (error) {}
@@ -19,6 +23,10 @@ export const getPostCodeBySuburbAndState = async (
     const response = await fetch(
       `${API_BASE_URL}/postcode/find?suburb=${suburb}&state=${state}`
     );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
     const result = await response.json();
     return result;
@@ -40,6 +48,10 @@ export const addPostCodeAndSuburb = async (
         suburb: suburb,
       }),
     });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
     if (response.status === 201) {
       return true;

@@ -1,3 +1,4 @@
+import { Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -8,8 +9,8 @@ const Header = () => {
   };
   return (
     <div>
-      <button onClick={handleHomeNav}>Home</button>
-      <button>Login</button>
+      <button onClick={handleHomeNav}><Home/></button>
+      {/* <button>Login</button> */}
     </div>
   );
 };

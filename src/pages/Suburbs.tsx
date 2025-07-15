@@ -82,7 +82,6 @@ const Suburbs = () => {
     }
   };
 
-
   return (
     <div className={styles.container}>
       <div>
@@ -126,6 +125,7 @@ const Suburbs = () => {
             <div className={styles.container__results__list}>
               {subs.assignedSuburbs.map((suburb, idx) => (
                 <div className={styles.container__results__subs} key={idx}>
+                  <div>📍</div>
                   {suburb.suburb}
                 </div>
               ))}

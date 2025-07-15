@@ -3,6 +3,7 @@ import styles from "./PostCode.module.scss";
 import { getPostCodeBySuburbAndState } from "../services/dataServices";
 import { AlertCircle, MapPin, RotateCcw, Search } from "lucide-react";
 import ShakeWrapper from "../utilities/ShakeWrapper";
+import Header from "../components/Header/Header";
 
 const PostCode = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -62,7 +63,7 @@ const PostCode = () => {
       setErrorMessage(true);
       setShake(true);
       setTimeout(() => setShake(false), 400);
-    } 
+    }
     setValidationErrors({ subInput: "", stateInput: "" });
     setPostCode(result);
     setConfirmedState(stateInput);
@@ -134,7 +135,7 @@ const PostCode = () => {
       )}
       {postCode && (
         <div className={styles.container__postcodeFound}>
-          <h5>Postcode found!</h5>
+          <h5>📍 Postcode found!</h5>
           <h1>{postCode ?? postCode}</h1>
           <p>
             {confirmedSuburb}, {confirmedState}

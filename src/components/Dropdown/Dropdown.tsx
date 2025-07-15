@@ -19,7 +19,7 @@ const navToPage = (e: React.MouseEvent<HTMLLIElement>
       <ul>
         <li data-value="postcode" onClick={navToPage}>🔍 Find a postcode</li>
         <li data-value="suburb" onClick={navToPage}> 📍 Find suburbs</li>
-        <li>➕ Add a suburb</li>
+        <li data-value="addsuburb" onClick={navToPage}>➕ Add a suburb</li>
       </ul>
     </div>
   )

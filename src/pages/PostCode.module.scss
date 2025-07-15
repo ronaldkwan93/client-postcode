@@ -1,5 +1,5 @@
 .container {
-  height: 60vh;
+  height: 70vh;
   width: 40vw;
   border-radius: 24px;
   background-color: white;
@@ -7,12 +7,39 @@
   flex-direction: column;
   align-items: center;
 
-  &__findButton {
-    padding: 1.5em 5em;
-    flex-basis: 100%;
-    display: block;
-    width: 100%;
+  h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
 
+  &__refresh {
+    padding: 1.2em;
+    &:hover {
+      box-shadow: none;
+      outline: none;
+      border: none;
+    }
+  }
+
+  &__pin {
+    margin-top: 2em;
+    padding: 1em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    color: white;
+    width: 3em;
+    height: 3em;
+  }
+
+  &__findButton {
+    padding: 1em 7.5em;
+    background-color: #7e66ead2;
+    color: white;
+
+    &__section {
+      display: flex;
+      gap: 0.5em;
+    }
   }
 
   &__form {
@@ -21,15 +48,72 @@
     align-items: center;
     margin-bottom: 1em;
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+
+    &__error {
+      border: 1px solid rgb(238, 173, 173);
+      padding: 1em;
+      border-radius: 10px;
+      color: rgb(236, 75, 75);
+      background-color: rgb(248, 238, 238);
+      display: flex;
+      gap: 0.5em;
+      margin-top: 1em;
+    }
 
     &__input {
       display: flex;
       flex-direction: column;
       gap: 0.5em;
+
+      input,
+      select {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        font-size: 0.9em;
+        outline: none;
+        box-shadow: none;
+        border: 1px solid black;
+        width: 30em;
+        height: 3em;
+        border-radius: 8px;
+        border-color: rgb(238, 238, 238);
+        padding: 0.5em;
+      }
+
+      select {
+        width: 31.2em;
+        height: 4em;
+      }
     }
   }
 
-  &__postcode {
-    user-select: all;
+  &__postcodeFound {
+    user-select: text;
+    border: 1px solid lightgreen;
+    padding: 0 9.5em;
+    border-radius: 9px;
+    background-color: rgba(144, 238, 144, 0.171);
+    color: green;
+
+    h1 {
+      margin: 0;
+    }
+
+    h5 {
+      margin: 1em;
+    }
+  }
+
+  &__postcodeNotFound {
+    border: 1px solid rgb(238, 173, 173);
+    padding: 1em;
+    border-radius: 10px;
+    color: rgb(236, 75, 75);
+    background-color: rgb(248, 238, 238);
+    display: flex;
+    gap: 0.5em;
+    margin-top: 1em;
   }
 }

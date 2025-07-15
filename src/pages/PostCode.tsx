@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import styles from "./PostCode.module.scss";
 import { getPostCodeBySuburbAndState } from "../services/dataServices";
+import { AlertCircle, MapPin, RotateCcw, Search } from "lucide-react";
+import ShakeWrapper from "../utilities/ShakeWrapper";
 
 const PostCode = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -12,13 +14,17 @@ const PostCode = () => {
     subInput: String;
     stateInput: String;
   }>({ subInput: "", stateInput: "" });
+  const [shake, setShake] = useState(false);
+  const [confirmedState, setConfirmedState] = useState<String>("");
+  const [confirmedSuburb, setConfirmedSuburb] = useState<String>("");
 
   const validateFields = (subInput: string, stateInput: string) => {
     if (subInput == "" || stateInput == "") {
       setValidationErrors({
         ...valErrors,
-        subInput: "Suburb or State can't be empty!",
+        subInput: "Suburb and State are required!",
       });
+
       return false;
     } else if (/\d/.test(subInput)) {
       setValidationErrors({
@@ -47,14 +53,20 @@ const PostCode = () => {
     inputRef.current?.focus();
     const fieldsValidated = validateFields(subInput, stateInput);
     if (!fieldsValidated) {
+      setShake(true);
+      setTimeout(() => setShake(false), 400);
       return;
     }
     const result = await getPostCodeBySuburbAndState(subInput, stateInput);
     if (result == undefined) {
       setErrorMessage(true);
+      setShake(true);
+      setTimeout(() => setShake(false), 400);
     }
     setValidationErrors({ subInput: "", stateInput: "" });
     setPostCode(result);
+    setConfirmedState(stateInput);
+    setConfirmedSuburb(subInput);
   };
 
   console.log(subInput);
@@ -64,7 +76,8 @@ const PostCode = () => {
   return (
     <div className={styles.container}>
       <div>
-        <h1>PostCode Finder</h1>
+        <MapPin className={styles.container__pin} />
+        <h2>PostCode Finder</h2>
       </div>
       <form
         action=""
@@ -75,7 +88,7 @@ const PostCode = () => {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Provide a suburb"
+            placeholder="Enter Suburb name"
             name="sub-input"
             value={subInput}
             onChange={(e) => setSubInput(e.target.value)}
@@ -86,7 +99,7 @@ const PostCode = () => {
             value={stateInput}
             onChange={(e) => setStateInput(e.target.value)}
           >
-            <option value="">-- Select --</option>
+            <option value="">Select state</option>
             <option value="NSW">NSW</option>
             <option value="VIC">VIC</option>
             <option value="QLD">QLD</option>
@@ -97,23 +110,48 @@ const PostCode = () => {
             <option value="NT">NT</option>
           </select>
         </div>
-        <button type="button" onClick={handleRefresh}>
-          🔄
-        </button>
       </form>
-      {(valErrors.subInput || valErrors.stateInput) && (
-        <div className={styles.container__form__error}>
-          {valErrors.subInput && <div>{valErrors.subInput}</div>}
-          {valErrors.stateInput && <div>{valErrors.stateInput}</div>}
-        </div>
-      )}
+
       <div>
+        <button
+          type="button"
+          onClick={handleRefresh}
+          className={styles.container__refresh}
+        >
+          <RotateCcw size={20} />
+        </button>
         <button onClick={handleSubmit} className={styles.container__findButton}>
-          Find me postcode
+          <div className={styles.container__findButton__section}>
+            <Search />
+            Find Postcode
+          </div>
         </button>
       </div>
-      <div className={styles.container__postcode}>{postCode ?? postCode}</div>
-      <div>{errorMessage && <div>No Postcode found! Try again!</div>}</div>
+      {(valErrors.subInput || valErrors.stateInput) && (
+        <div className={styles.container__form__error}>
+          <ShakeWrapper shake={shake}>
+            <AlertCircle />
+            {valErrors.subInput && <div>{valErrors.subInput}</div>}
+            {valErrors.stateInput && <div>{valErrors.stateInput}</div>}
+          </ShakeWrapper>
+        </div>
+      )}
+      {postCode && (
+        <div className={styles.container__postcodeFound}>
+          <h5>Postcode found!</h5>
+          <h1>{postCode ?? postCode}</h1>
+          <p>
+            {confirmedSuburb}, {confirmedState}
+          </p>
+        </div>
+      )}
+      {errorMessage && (
+        <div className={styles.container__postcodeNotFound}>
+          <ShakeWrapper shake={shake}>
+            <div>No Postcode found! Try again!</div>
+          </ShakeWrapper>
+        </div>
+      )}
     </div>
   );
 };

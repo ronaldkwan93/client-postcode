@@ -51,6 +51,7 @@ export const addPostCodeAndSuburb = async (
 
     if (!response.ok) {
       throw new Error("Failed to fetch data");
+      return false;
     }
 
     if (response.status === 201) {

@@ -3,7 +3,6 @@ import styles from "./PostCode.module.scss";
 import { getPostCodeBySuburbAndState } from "../services/dataServices";
 import { AlertCircle, MapPin, RotateCcw, Search } from "lucide-react";
 import ShakeWrapper from "../utilities/ShakeWrapper";
-import Header from "../components/Header/Header";
 
 const PostCode = () => {
   const inputRef = useRef<HTMLInputElement>(null);

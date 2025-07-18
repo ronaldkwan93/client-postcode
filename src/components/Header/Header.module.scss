@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    align-items: center;
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+    }
+}

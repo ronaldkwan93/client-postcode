@@ -1,5 +1,6 @@
-import { Home } from "lucide-react";
+import { Home, LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -8,9 +9,16 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <div>
-      <button onClick={handleHomeNav}><Home/></button>
-      {/* <button>Login</button> */}
+    <div className={styles.container}>
+      <button onClick={handleHomeNav}>
+        <Home />
+      </button>
+      <div>
+        <button className={styles.container__btn}>
+          Login
+          <LogIn />
+        </button>
+      </div>
     </div>
   );
 };

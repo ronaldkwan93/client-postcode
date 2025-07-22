@@ -1,10 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./AddSuburb.module.scss";
 import { addPostCodeAndSuburb } from "../services/dataServices";
 import { AlertCircle, Check, Plus, RotateCcw } from "lucide-react";
 import ShakeWrapper from "../utilities/ShakeWrapper";
+import { useAuth } from "../context/UserContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddSuburb = () => {
+  const navigate = useNavigate();
+  const { loggedInUser, userRole, jwt } = useAuth();
   const postRef = useRef<HTMLInputElement>(null);
   const suburbRef = useRef<HTMLInputElement>(null);
   const [postcode, setPostcode] = useState("");
@@ -12,6 +16,15 @@ const AddSuburb = () => {
   const [submitStatus, setSubmitStatus] = useState<Boolean>(false);
   const [valError, setValError] = useState("");
   const [shake, setShake] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    if (loggedInUser == null || userRole !== "ADMIN") {
+      setValError(
+        "Access denied. You are not authorized to view this content."
+      );
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +36,7 @@ const AddSuburb = () => {
       setShake(true);
       setTimeout(() => setShake(false), 400);
       return;
-    } else if (/[A-Za-z]/.test(postcode)) {
+    } else if (/[A-Za-z]/.test(postcode) || postcode.length < 4) {
       setValError("Please provide a valid postcode");
       postRef.current?.focus();
       setShake(true);
@@ -41,15 +54,15 @@ const AddSuburb = () => {
       setTimeout(() => setShake(false), 400);
       return;
     }
-    const result = await addPostCodeAndSuburb(postcode, suburb);
-    if(result === undefined) {
-        setValError("Suburb already exists in this area!");
+    const result = await addPostCodeAndSuburb(postcode, suburb, jwt ?? "");
+    if (result === undefined) {
+      setValError("Suburb already exists in this area!");
       suburbRef.current?.focus();
       setShake(true);
       setTimeout(() => setShake(false), 400);
       return;
     }
-    setSubmitStatus(result ?? false);
+    setSuccessMessage("Suburb successfully added to Database!");
   };
 
   const handleRefresh = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -84,6 +97,7 @@ const AddSuburb = () => {
             // pattern="\d{4}"
             maxLength={4}
             value={postcode}
+            disabled={userRole !== "ADMIN"}
             onChange={(e) => setPostcode(e.target.value)}
           />
           <input
@@ -91,6 +105,7 @@ const AddSuburb = () => {
             type="text"
             placeholder="Enter suburb name"
             value={suburb}
+            disabled={userRole !== "ADMIN"}
             onChange={(e) => setSuburb(e.target.value)}
           />
         </div>
@@ -99,19 +114,21 @@ const AddSuburb = () => {
           <button
             type="button"
             onClick={handleRefresh}
+            disabled={userRole !== "ADMIN"}
             className={styles.container__refresh}
           >
             <RotateCcw size={20} />
           </button>
           <button
             type="submit"
+            disabled={userRole !== "ADMIN"}
             className={
               submitStatus
                 ? styles.container__success
                 : styles.container__submitButton
             }
           >
-            <div className={styles.container__submitButton__section}>
+            <div>
               {submitStatus ? (
                 <div className={styles.container__submitSuccess}>
                   <Check />
@@ -133,6 +150,9 @@ const AddSuburb = () => {
               <div>{valError}</div>
             </ShakeWrapper>
           </div>
+        )}
+        {successMessage && (
+          <div className={styles.container__successMsg}>{successMessage}</div>
         )}
       </form>
     </div>

@@ -74,20 +74,8 @@
 
   &__submitButton {
     padding: 1em 8.6em;
-    background-color: #7e66ead2;
     color: white;
-    button {
-      background-color: #7e66ead2;
-    }
-  }
-
-  &__success {
-     padding: 1em 8.6em;
-    background-color: #89ec7cd2;
-    color: rgb(26, 13, 13);
-    button {
-      background-color: #7e66ead2;
-    }
+    transition: background-color 0.3s ease;
   }
 
   &__plusButton {
@@ -115,5 +103,21 @@
     justify-content: center;
     align-items: center;
     gap: 0.5em;
+  }
+  &__success {
+    padding: 1em 8.6em;
+    color: rgb(255, 255, 255);
+
+  }
+  &__successMsg {
+    user-select: text;
+    border: 1px solid lightgreen;
+    margin-top: 1em;
+    padding: 0.5em;
+    border-radius: 9px;
+    background-color: rgba(144, 238, 144, 0.171);
+    color: green;
+    margin: 0 auto;
+    margin-top: 1em;
   }
 }

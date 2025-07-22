@@ -1,5 +1,5 @@
 .container {
-  height: 70vh;
+  height: 75vh;
   width: 40vw;
   border-radius: 24px;
   background-color: white;
@@ -48,7 +48,6 @@
     color: green;
     margin: auto;
     width: 90%;
-
     h3 {
       margin: 0;
     }
@@ -130,5 +129,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
   }
 }

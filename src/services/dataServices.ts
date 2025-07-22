@@ -1,9 +1,16 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const getSuburbs = async (postcode: String) => {
+export const getSuburbs = async (postcode: String, jwt: String) => {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/postcode?postcode=${postcode}`
+      `${API_BASE_URL}/postcode?postcode=${postcode}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
     );
 
     if (!response.ok) {
@@ -21,7 +28,13 @@ export const getPostCodeBySuburbAndState = async (
 ) => {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/postcode/find?suburb=${suburb}&state=${state}`
+      `${API_BASE_URL}/postcode/find?suburb=${suburb}&state=${state}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     if (!response.ok) {
@@ -35,13 +48,15 @@ export const getPostCodeBySuburbAndState = async (
 
 export const addPostCodeAndSuburb = async (
   postcode: String,
-  suburb: String
+  suburb: String,
+  jwt: String
 ) => {
   try {
     const response = await fetch(API_BASE_URL + "/postcode", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         postcode: postcode,
@@ -51,7 +66,6 @@ export const addPostCodeAndSuburb = async (
 
     if (!response.ok) {
       throw new Error("Failed to fetch data");
-      return false;
     }
 
     if (response.status === 201) {
@@ -60,4 +74,56 @@ export const addPostCodeAndSuburb = async (
       return false;
     }
   } catch (error) {}
+};
+
+export const registerUser = async (
+  name: String,
+  email: String,
+  password: String
+) => {
+  try {
+    const response = await fetch(API_BASE_URL + "/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.status || "Registration failed");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    return { error: error.message };
+  }
+};
+
+export const loginUser = async (email: String, password: String) => {
+  try {
+    const response = await fetch(API_BASE_URL + "/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Error login user");
+  }
 };

@@ -6,6 +6,8 @@ import Suburbs from "./pages/Suburbs";
 import PostCode from "./pages/PostCode";
 import Header from "./components/Header/Header";
 import AddSuburb from "./pages/AddSuburb";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
             <Route path="/suburb" element={<Suburbs />} />
             <Route path="/postcode" element={<PostCode />} />
             <Route path="/addsuburb" element={<AddSuburb />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
       </div>

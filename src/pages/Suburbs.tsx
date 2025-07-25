@@ -29,11 +29,6 @@ const Suburbs = () => {
 
   console.log("assignedSuburbs:", subs?.assignedSuburbs);
 
-  useEffect(() => {
-    if(loggedInUser == null) {
-      navigate("/login")
-    } 
-  }, [])
 
   const validateField = (postcode: string) => {
     if (postcode == "") {

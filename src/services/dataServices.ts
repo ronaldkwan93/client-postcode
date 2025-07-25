@@ -3,12 +3,11 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const getSuburbs = async (postcode: String, jwt: String) => {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/postcode?postcode=${postcode}`,
+      `${API_BASE_URL}/postcode/findSuburbs?postcode=${postcode}`,
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json"
         },
       }
     );

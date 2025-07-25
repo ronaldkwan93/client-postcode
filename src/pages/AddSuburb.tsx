@@ -29,6 +29,7 @@ const AddSuburb = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setValError("");
+    setSuccessMessage("");
     setSubmitStatus(false);
     if (postcode === "") {
       setValError("Postcode and Suburb are required!");

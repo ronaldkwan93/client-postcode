@@ -10,7 +10,7 @@ const Home = () => {
     <div className={styles.container}>
       <MotionWrapper>
         <div className={styles.container__heading}>
-          <h1>Postcode API</h1>
+          <h1>Postcode APIz</h1>
           <p>Your comprehensive postcode and suburb lookup service</p>
         </div>
       </MotionWrapper>

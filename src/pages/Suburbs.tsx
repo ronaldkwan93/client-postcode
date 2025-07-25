@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./Suburbs.module.scss";
 import { getSuburbs } from "../services/dataServices";
 import { AlertCircle, Home, RotateCcw, Search } from "lucide-react";
 import ShakeWrapper from "../utilities/ShakeWrapper";
-import { useAuth } from "../context/UserContextProvider";
-import { useNavigate } from "react-router-dom";
 
 type Suburb = {
   suburb: string;
@@ -18,8 +16,6 @@ type Postcode = {
 };
 
 const Suburbs = () => {
-  const navigate = useNavigate();
-  const {loggedInUser, jwt} = useAuth();
   const inputRef = useRef<HTMLInputElement>(null);
   const [subs, setsubs] = useState<Postcode | null>(null);
   const [postcode, setPostcode] = useState<string>("");
@@ -28,7 +24,6 @@ const Suburbs = () => {
   const [shake, setShake] = useState(false);
 
   console.log("assignedSuburbs:", subs?.assignedSuburbs);
-
 
   const validateField = (postcode: string) => {
     if (postcode == "") {
@@ -72,7 +67,7 @@ const Suburbs = () => {
 
     if (postcode.trim() !== "") {
       try {
-        const data = await getSuburbs(postcode, jwt ?? "");
+        const data = await getSuburbs(postcode);
         if (data) {
           setsubs(data);
         }

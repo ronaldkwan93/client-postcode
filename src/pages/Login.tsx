@@ -5,7 +5,7 @@ import { loginUser } from "../services/dataServices";
 import { useAuth } from "../context/UserContextProvider";
 
 const Login = () => {
-  const { setLoggedInUser, loggedInUser, setUserRole, userRole, jwt, setJwt } =
+  const { setLoggedInUser, setUserRole, userRole, setJwt } =
     useAuth();
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);

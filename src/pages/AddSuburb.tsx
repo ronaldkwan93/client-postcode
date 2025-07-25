@@ -4,10 +4,8 @@ import { addPostCodeAndSuburb } from "../services/dataServices";
 import { AlertCircle, Check, Plus, RotateCcw } from "lucide-react";
 import ShakeWrapper from "../utilities/ShakeWrapper";
 import { useAuth } from "../context/UserContextProvider";
-import { useNavigate } from "react-router-dom";
 
 const AddSuburb = () => {
-  const navigate = useNavigate();
   const { loggedInUser, userRole, jwt } = useAuth();
   const postRef = useRef<HTMLInputElement>(null);
   const suburbRef = useRef<HTMLInputElement>(null);

@@ -25,6 +25,8 @@ jobs:
       # Builds the React app, creating a production-ready version in the 'dist' folder
       - name: Build React App
         run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
 
       # Configures AWS credentials for the workflow to interact with AWS
       - name: Configure AWS credentials

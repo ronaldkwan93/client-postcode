@@ -20,6 +20,7 @@ const Home = () => {
         <div className={styles.container__actionBox}>
           <div
             className={styles.container__action}
+            data-testid="action"
             onClick={() => setDropDown((prev) => !prev)}
           >
             <h3>Choose an action</h3>
@@ -32,7 +33,7 @@ const Home = () => {
             </p>
           </div>
           {dropDown && (
-            <div className={styles.container__dropdown}>
+            <div className={styles.container__dropdown} data-testid="dropdown">
               <Dropdown />
             </div>
           )}

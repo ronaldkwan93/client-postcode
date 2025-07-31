@@ -1,7 +1,10 @@
+name: Build and Deploy
+
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Run Tests"] # Matches the name: field in test.yml
+    types:
+      - completed
 
 permissions:
   # Allows the workflow to obtain an ID token to authenticate with AWS securely
@@ -13,6 +16,7 @@ jobs:
   build-and-deploy:
     # The job runs on the latest Ubuntu environment provided by GitHub Actions
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       # Checks out the repository code to the runner machine
       - name: Checkout source

@@ -143,7 +143,7 @@ const AddSuburb = () => {
           </button>
         </div>
         {valError && (
-          <div className={styles.container__validationError}>
+          <div className={styles.container__validationError} data-testid="auth-error-msg">
             <ShakeWrapper shake={shake}>
               <AlertCircle />
               <div>{valError}</div>

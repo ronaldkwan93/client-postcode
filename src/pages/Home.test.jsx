@@ -6,9 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import Home from "./Home";
 
 describe("Homepage Tests", () => {
-  it("Should run tests", () => {
-    expect(1 + 1).toBe(2);
-  });
 
   it("Should render correct content", () => {
     render(<Home />);

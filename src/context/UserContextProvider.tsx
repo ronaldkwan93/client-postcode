@@ -15,12 +15,20 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 interface UserContextProviderProps {
   children: ReactNode;
+  initialValue?: Partial<AuthContextType>;
 }
 
-export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [jwt, setJwt] = useState<string | null>(null);
+export const UserContextProvider = ({
+  children,
+  initialValue = {},
+}: UserContextProviderProps) => {
+  const [loggedInUser, setLoggedInUser] = useState<string | null>(
+    initialValue.loggedInUser ?? null
+  );
+  const [userRole, setUserRole] = useState<string | null>(
+    initialValue.userRole ?? null
+  );
+  const [jwt, setJwt] = useState<string | null>(initialValue.jwt ?? null);
 
   const logout = async () => {
     setLoggedInUser(null);

@@ -94,6 +94,7 @@ const PostCode = () => {
             id="state-input"
             value={stateInput}
             onChange={(e) => setStateInput(e.target.value)}
+            data-testid='state-input'
           >
             <option value="">Select state</option>
             <option value="NSW">NSW</option>
@@ -113,10 +114,11 @@ const PostCode = () => {
           type="button"
           onClick={handleRefresh}
           className={styles.container__refresh}
+          data-testid = "refresh-btn"
         >
           <RotateCcw size={20} />
         </button>
-        <button onClick={handleSubmit} className={styles.container__findButton}>
+        <button onClick={handleSubmit} className={styles.container__findButton} data-testid="submit-btn">
           <div className={styles.container__findButton__section}>
             <Search />
             Find Postcode
@@ -124,7 +126,7 @@ const PostCode = () => {
         </button>
       </div>
       {(valErrors.subInput || valErrors.stateInput) && (
-        <div className={styles.container__form__error}>
+        <div className={styles.container__form__error} data-testid="validation-error-msg">
           <ShakeWrapper shake={shake}>
             <AlertCircle />
             {valErrors.subInput && <div>{valErrors.subInput}</div>}
@@ -142,7 +144,7 @@ const PostCode = () => {
         </div>
       )}
       {errorMessage && (
-        <div className={styles.container__postcodeNotFound}>
+        <div className={styles.container__postcodeNotFound} data-testid="error-msg">
           <ShakeWrapper shake={shake}>
             <AlertCircle />
             <div>No Postcode found! Try again!</div>

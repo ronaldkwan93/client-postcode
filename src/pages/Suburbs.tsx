@@ -109,10 +109,15 @@ const Suburbs = () => {
             type="button"
             onClick={handleRefresh}
             className={styles.container__refresh}
+            data-testid="refresh-btn"
           >
             <RotateCcw size={20} />
           </button>
-          <button type="submit" className={styles.container__findButton}>
+          <button
+            type="submit"
+            className={styles.container__findButton}
+            data-testid="submit-btn"
+          >
             <div className={styles.container__findButton__section}>
               <Search />
               Find Postcode
@@ -134,7 +139,10 @@ const Suburbs = () => {
         )}
 
         {valError && (
-          <div className={styles.container__suburbsNotFound}>
+          <div
+            className={styles.container__suburbsNotFound}
+            data-testid="validation-error-msg"
+          >
             <ShakeWrapper shake={shake}>
               <AlertCircle />
               <div>{valError}</div>
@@ -142,7 +150,10 @@ const Suburbs = () => {
           </div>
         )}
         {errorMessage && (
-          <div className={styles.container__suburbsNotFound}>
+          <div
+            className={styles.container__suburbsNotFound}
+            data-testid="error-msg"
+          >
             <ShakeWrapper shake={shake}>
               <AlertCircle />
               <div>Sorry this Postcode has no suburbs yet!</div>

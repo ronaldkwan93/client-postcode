@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Suburbs from "./Suburbs";
 
-describe("Homepage Tests", () => {
+describe("Suburb page Tests", () => {
   it("Should run tests", () => {
     expect(1 + 1).toBe(2);
   });

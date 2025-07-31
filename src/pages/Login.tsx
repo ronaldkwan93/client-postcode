@@ -48,7 +48,7 @@ const Login = () => {
   }, [loginState]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="login-page">
       <h1>Welcome Back</h1>
       <p>Sign in to your account</p>
 

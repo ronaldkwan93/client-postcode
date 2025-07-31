@@ -28,8 +28,10 @@ describe("Homepage Tests", () => {
     );
     const button = screen.getByTestId("action");
     await user.click(button);
-    screen.debug();
+    // screen.debug();
     const dropdown = screen.getByTestId("dropdown");
     expect(dropdown).toBeInTheDocument();
   });
+
+  
 });

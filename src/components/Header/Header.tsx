@@ -20,7 +20,7 @@ const Header = () => {
     navigate("/login");
     console.log(loggedInUser);
   };
-  
+
   return (
     <div className={styles.container}>
       <button onClick={handleHomeNav}>
@@ -28,14 +28,18 @@ const Header = () => {
       </button>
       <div>
         {loggedInUser == null ? (
-          <button className={styles.container__btn} onClick={handleLogNav}>
+          <button
+            className={styles.container__btn}
+            onClick={handleLogNav}
+            data-testid="login-btn"
+          >
             Login
             <LogIn />
           </button>
         ) : (
           <button className={styles.container__btn} onClick={handleLogout}>
             Logout
-            <LogOut/>
+            <LogOut />
             {/* <LogIn /> */}
           </button>
         )}

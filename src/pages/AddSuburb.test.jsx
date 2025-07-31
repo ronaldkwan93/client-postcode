@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import AddSuburb from "./AddSuburb";
 import { UserContextProvider } from "../context/UserContextProvider";
 
-describe("Homepage Tests", () => {
+describe("Add suburbs page Tests", () => {
   it("Should run tests", () => {
     expect(1 + 1).toBe(2);
   });

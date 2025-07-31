@@ -1,7 +1,6 @@
 ## CICD
 
-[![Build and Deploy](https://github.com/ronaldkwan93/client-postcode/actions/workflows/auto-deployment.yml/badge.svg)](https://github.com/ronaldkwan93/client-postcode/actions/workflows/auto-deployment.yml)
-
+[![Run Tests](https://github.com/ronaldkwan93/client-postcode/actions/workflows/test.yml/badge.svg)](https://github.com/ronaldkwan93/client-postcode/actions/workflows/test.yml)
 [![.github/workflows/auto-deployment.yml](https://github.com/ronaldkwan93/client-postcode/actions/workflows/auto-deployment.yml/badge.svg?branch=main)](https://github.com/ronaldkwan93/client-postcode/actions/workflows/auto-deployment.yml)
 
 # PostCode API

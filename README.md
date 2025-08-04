@@ -3,6 +3,10 @@
 [![Run Tests](https://github.com/ronaldkwan93/client-postcode/actions/workflows/test.yml/badge.svg)](https://github.com/ronaldkwan93/client-postcode/actions/workflows/test.yml)
 [![.github/workflows/auto-deployment.yml](https://github.com/ronaldkwan93/client-postcode/actions/workflows/auto-deployment.yml/badge.svg?branch=main)](https://github.com/ronaldkwan93/client-postcode/actions/workflows/auto-deployment.yml)
 
+## DEMO
+[Live Demo](https://d18275glmimxyg.cloudfront.net/)
+
+
 # PostCode API
 
 - The Postcode API is a fast, accurate, and easy-to-use web application for retrieving and managing Australian suburbs and postcode data.
